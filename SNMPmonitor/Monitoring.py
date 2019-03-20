@@ -57,18 +57,18 @@ class Monitoring(threading.Thread):
             self.upDateInfoDevice(infoSystem)## actualizacion de la informacion del dispositivo se actualiza la base de datos
         infoOID = self.getInformationDevice(self.OIDlist) # informacioin de las mib a monitorizar
         if infoSystem:
-            print(infoOID) ## este es la dato que nececitas 
+            print("Este es el dato que nececitas ..."+str(infoOID)) ## este es la dato que nececitas 
             
     def run(self):
         while self.isUP():
             self.startMonitoring()
             time.sleep(self.getTimeUpDate())
     def upDateInfoDevice(self,infoSystem):# funcion que actualiza la info del sistema
-        system = setSystem(infoSystem[0])
+        system = self.setSystem(infoSystem[0])
         self.db.upDateDevice(self.device.getIP(),system,infoSystem[1],infoSystem[2],infoSystem[3])
     def setSystem(self,info):
         system = None
-        if self.pattern.search(infoSystem[0]):
+        if self.pattern.search(info):
             system = 'Linux'
         else:
             system = 'Windodws'
